@@ -467,9 +467,11 @@ Windows 用户可以先阅读 `copy_windows_fonts.ps1`，再在项目目录的 P
 
 ## 开源许可
 
-本项目采用 [MIT License](LICENSE)。你可以在保留版权声明和许可文本的前提下使用、修改和分发本项目。
+本项目由学生根据厦门工学院本科毕业论文（设计）的 Word 格式要求独立实现，属于非官方项目，暂未获得厦门工学院官方认证、推荐或背书。正式提交前，请以学校、学院和指导教师当年发布的要求为准。
 
-学校名称、校徽及其他第三方素材的相关权利仍归原权利人所有，不因本项目采用 MIT License 而获得额外授权。本项目不是厦门工学院官方发布或认证的模板。
+除另有说明外，本项目作者原创的 LaTeX 源代码、编译脚本和说明文档采用 [MIT License](LICENSE)。你可以在保留版权声明和许可文本的前提下使用、修改和分发这些内容。
+
+学校名称、校徽、Logo、字体以及其他第三方素材不自动纳入 MIT License，其相关权利仍归原权利人所有。具体边界见 [NOTICE.md](NOTICE.md)。
 
 [overleaf]: https://www.overleaf.com/
 [upload]: https://www.overleaf.com/learn/latex/Kb/Uploading_a_project
