@@ -465,6 +465,12 @@ Windows 用户可以先阅读 `copy_windows_fonts.ps1`，再在项目目录的 P
 
 使用中的其他写法可以在单个论文 ZIP 内的 `LATEX_OVERLEAF_GUIDE.md` 查找；版式调整记录在 `FORMAT_CHANGELOG.md`。发现问题可在仓库 Issues 中说明使用的是空白版还是示例版、在线还是本地环境，并附首个关键报错和能复现问题的小段代码。涉及学校新规范时附上对应要求，截图和文件中的个人信息请先脱敏。
 
+## 开源许可
+
+本项目采用 [MIT License](LICENSE)。你可以在保留版权声明和许可文本的前提下使用、修改和分发本项目。
+
+学校名称、校徽及其他第三方素材的相关权利仍归原权利人所有，不因本项目采用 MIT License 而获得额外授权。本项目不是厦门工学院官方发布或认证的模板。
+
 [overleaf]: https://www.overleaf.com/
 [upload]: https://www.overleaf.com/learn/latex/Kb/Uploading_a_project
 [compiler]: https://docs.overleaf.com/getting-started/recompiling-your-project/selecting-a-tex-live-version-and-latex-compiler
