@@ -1,191 +1,166 @@
 # 厦门工学院本科毕业论文（设计）LaTeX 模板
 
-这是一套面向厦门工学院本科生的毕业论文（设计）LaTeX 模板，包含封面、声明页、中英文摘要、目录、正文、参考文献、总结、谢辞和附录。模板把论文内容和排版设置分开：平时主要写正文、替换图片和录入文献，标题编号、图表编号和目录交给模板处理。
+这套模板用于排版厦门工学院本科毕业论文（设计），包含封面、声明页、中英文摘要、目录、正文、参考文献、总结、谢辞和附录。仓库提供一份空白模板，以及一份已经填入内容的 AI 示范论文。
 
-第一次接触 LaTeX，可以从下面的“第一次编译”开始，先改好自己的姓名，再逐步写摘要和正文。文中的配图既展示修改位置，也展示实际生成的 PDF；代码块保留了可以复制的写法，不需要照着截图逐字输入。
+**正式写论文用空白模板，学习写法时对照 AI 示范论文。** 两份材料中的文件名基本相同，读懂示例后，就能回到空白模板的同一位置修改。不需要额外下载其他教学项目。
 
-> 本项目是非官方模板，正式提交前请核对所在学院、专业和指导教师当年的要求。AI 示例论文及本页练习中的内容、图片和文献占位条目只用于教学，不能作为真实研究成果提交。
+![空白模板封面与 AI 示范论文摘要、目录的实际页面](docs/images/01-preview.png)
 
-![模板预览：空白模板封面、AI 示例中文摘要和目录](docs/images/01-template-preview.png)
+*配图取自原包随附的 PDF。AI 示范论文中的课题、图表和测试结果用于排版教学，不应作为真实研究成果提交。本模板为非官方项目，正式提交前请核对所在学院、专业和指导教师当年的要求。*
 
-*上图来自两套模板随附的 PDF。后面的操作对照图来自使用同一份样式文件编译的练习项目，采用回退字体；更换字体后，字形、换行和分页可能有所不同。*
-
-**按需查看：** [第一次编译](#start) · [封面与摘要](#metadata) · [正文与目录](#chapters) · [图片、表格和公式](#objects) · [参考文献](#references) · [总结与附录](#backmatter) · [常见问题](#troubleshooting) · [本地编译与字体](#local) · [导出与备份](#export)
+**查找内容：** [上传与编译](#start) · [封面和摘要](#metadata) · [正文与目录](#chapters) · [图表、公式和代码](#objects) · [参考文献](#references) · [常见问题](#help) · [本地编译与字体](#local)
 
 <a id="start"></a>
-## 从下载到第一次编译
+## 下载哪一份，怎样开始
 
-### 先选对压缩包
+准备正式写论文，下载 [厦门工学院毕业设计论文模板.zip](厦门工学院毕业设计论文模板.zip)。它保留了章节结构和中文注释，正文中的“请输入……”和“这里填写……”需要换成自己的内容。空白模板的 `figures/` 目前只有封面使用的 `logo.png`，不会自带你的系统框图或实验图片。
 
-仓库中的两套主要材料用途不同。**正式写论文，从空白模板开始；学习写法时，对照 AI 示例论文。**
+想先看看完整论文的写法，下载 [厦门工学院AI示范论文.zip](厦门工学院AI示范论文.zip)。解压后打开 `preview.pdf`，可以看到“基于 STM32 的智能照明系统设计”的排版效果。需要学习插图时，对照 `chap/chapter2.tex`；需要看公式时，查看 `chap/chapter3.tex`；参考文献在 `ref.bib`，代码附录在 `chap/appendixA.tex`。后文会直接用这些已有内容讲解。
 
-| 文件 | 用法 |
-| --- | --- |
-| [厦门工学院毕业设计论文模板.zip](厦门工学院毕业设计论文模板.zip) | 空白写作模板。保留章节结构、占位文字和中文注释，适合替换为自己的论文内容。 |
-| [厦门工学院AI示范论文.zip](厦门工学院AI示范论文.zip) | 教学示例。以“基于 STM32 的智能照明系统设计”为题，演示章节、图表、公式、文献和附录如何放在一起。 |
+在 GitHub 点击文件名进入文件页面后，可以下载对应 ZIP。也可以从仓库首页的 `Code > Download ZIP` 下载整个仓库。后一种方式得到的是外层压缩包，**先把它解压，再取出里面的单个论文 ZIP**。上传论文时，不要把装着两套模板和 README 配图的外层压缩包传上去。
 
-可以点击上面的文件名进入 GitHub 文件页面，再下载对应 ZIP。也可以在仓库首页点击 `Code`，选择 `Download ZIP` 下载整个仓库；这是 GitHub 的[源码下载入口][github-download]。
+### 在 Overleaf 中打开模板
 
-下载整个仓库后，**先解压最外层压缩包**，取出里面的 `厦门工学院毕业设计论文模板.zip`。上传到 Overleaf 的应当是这个单独的论文项目，而不是同时装着 README、配图和两套模板的仓库总压缩包。仓库名称可能不同，判断时看里面是什么文件，不要只看压缩包名字。
+LaTeX 的源文件是 `.tex`，排版后的成品是 PDF。“编译”就是把源文件里的文字和命令处理成 PDF。Overleaf 提供在线编辑与编译环境，不打算安装本地软件的同学，可以用它开始。
 
-本文还附有一份更小的[配图练习项目](docs/examples/quickstart-demo.zip)和它的[编译结果](docs/examples/quickstart-demo.pdf)，专门对应后面的操作截图。它不是第三套正式论文模板，只用于练习；想照图逐项操作，可以另建一个 Overleaf 项目上传它，不要覆盖已经写好的论文。练习项目的具体说明见 [docs/examples/README.md](docs/examples/README.md)。
+登录 [Overleaf][overleaf]，在项目列表选择 `New Project`，再选择 `Upload Project`，上传 `厦门工学院毕业设计论文模板.zip`。上传后，文件区应当能看到 `main.tex`、`xitthesis.cls`、`ref.bib` 和 `chap/`。若仍然只有两个 ZIP，看不到这些源文件，说明上传的是外层压缩包，需要重新选择。操作入口可对照 [Overleaf 官方上传图解][upload]。
 
-### 在 Overleaf 中上传并设置编译器
+打开项目设置 `Settings`，进入 `Compiler`，将编译器设为 **XeLaTeX**，将 `Main document` 设为 **main.tex**。设置入口可能是编辑器左下方的齿轮按钮，也可以从 `File > Settings` 进入；旧界面通常从 `Menu` 进入。界面位置有变化时，认准这两个设置名称即可。[编译器设置][compiler]和[主文件设置][main-document]的官方说明中都有截图。
 
-LaTeX 的基本过程是“编辑源文件，再编译成 PDF”。`.tex` 是可以继续修改的论文源文件，PDF 是排版后的成品。Overleaf 提供在线编辑和编译环境，不准备安装本地软件的同学，可以先用它完成下面的练习。
+![上传后的文件检查：空白模板目录、编译器与主文件设置值](docs/images/02-project-files.png)
 
-登录 [Overleaf][overleaf] 后，在项目列表选择 `New Project`，再选择 `Upload Project`，上传单个论文 ZIP。上传成功后，文件区应能看到 `main.tex`、`xitthesis.cls`、`ref.bib` 和 `chap/` 等文件。如果仍然只看到两个 ZIP，而看不到论文源文件，说明需要回到上一步重新选择压缩包。[Overleaf 官方上传说明][overleaf-upload]中有对应的操作截图。
+*这是根据原包文件整理的检查图，不是 Overleaf 界面截图。设置中的 XeLaTeX 和 main.tex 分别是编译器与主文件，不能互相替代。*
 
-打开项目设置，在新版界面中点击齿轮按钮，再进入 `Compiler` 设置。将 **Compiler 设为 `XeLaTeX`**，将 **Main document 设为 `main.tex`**。旧版界面的入口可能叫 `Menu`，位置不同，但这两个设置值相同。不要选择 pdfLaTeX，也不要把某一章的 `chapter1.tex` 设成主文件；当前模板的样式文件明确要求使用 XeLaTeX。[编译器设置][overleaf-compiler]和[主文件设置][overleaf-main]可以分别对照官方文档确认。
+本模板的样式文件明确要求使用 XeLaTeX。不要选择 pdfLaTeX，也不要把某一章的 `chapter1.tex` 设成主文件。`TeX Live version` 是另一项设置，第一次可以先保留默认值，遇到版本兼容问题时再结合日志处理。
 
-`TeX Live version` 是另一项设置，不是编译器名称。第一次使用可以先保留项目默认值；项目已经能正常编译后，不必为了改正文而来回切换版本。不同环境的宏包和字体可能不同，遇到兼容问题时应当保留报错和版本信息，再定位原因。
-
-![首次使用检查：论文项目中的文件、XeLaTeX 和 main.tex 设置值、空白封面](docs/images/02-first-compile.png)
-
-*这是一张项目文件与 PDF 的检查图，不是 Overleaf 界面截图。左侧清单来自空白模板，右侧是空白模板的封面预览。*
-
-### 先只改一个姓名
-
-打开 `main.tex`，找到下面这一行，把大括号中的“请输入姓名”换成自己的名字：
+点击 `Recompile`（重新编译），查看生成的 PDF。首次使用可以先不改其他地方，只在 `main.tex` 中找到这一行：
 
 ```tex
 \XITAuthor{请输入姓名}
 ```
 
-点击 `Recompile`（重新编译），查看新生成的 PDF。封面上的姓名也变化了，就说明你已经完成了最基本的“编辑—编译—检查”过程。接下来再填写其他信息，不必一次替换整篇论文。
+把大括号中的文字换成自己的姓名，保留命令和大括号，再编译一次。封面姓名也变化了，说明上传、编辑和编译这条流程已经走通，接下来再填写其他内容。
 
-空白模板中的“请输入……”和“这里填写……”都是占位文字，出现它们是正常的。由于正文没有启用示例文献引用，初始参考文献列表也可能为空，不要仅凭这一点判断编译失败。
-
-检查修改效果时，要看**本次编译的 PDF 预览**。压缩包中自带的 `preview.pdf` 和原有 `main.pdf` 是已经生成的文件，特别是 `preview.pdf`，不会因为你改了 `.tex` 就自动更新。若预览仍显示旧内容，先确认本次编译是否成功。
+这里要区分新生成的 PDF 与压缩包自带的预览。`preview.pdf` 是已有快照，不会随源文件修改自动更新；示例版随附 PDF 的封面姓名与当前 `main.tex` 中的姓名也不一致。检查修改结果时，请看**本次成功编译生成的 PDF**，不要拿旧预览判断修改是否生效。
 
 <a id="metadata"></a>
 ## 填写封面和中英文摘要
 
-### 封面信息集中在 main.tex
-
-在 `main.tex` 中找到“论文基本信息”部分。下面用一组练习信息说明写法，正式使用时请替换为自己的实际内容；每行后面以 `%` 开始的原有注释可以保留。
+封面信息集中在 `main.tex` 的“论文基本信息”部分。下面是空白模板已有的字段，直接在原位置修改，不要把整段重复粘贴到文件末尾。
 
 ```tex
 \XITSchool{厦门工学院}
 \XITThesisName{本科毕业论文（设计）}
-\XITTitle{毕业论文排版练习}
-\XITEnglishTitle{A Thesis Typesetting Exercise}
-\XITAuthor{示例同学}
-\XITStudentID{2022000000}
-\XITMajor{示例专业}
-\XITGrade{2022 级}
-\XITSupervisor{示例教师}
-\XITDate{2026 年 5 月}
-\XITChineseKeywords{论文模板；排版练习；交叉引用}
-\XITEnglishKeywords{thesis template; typesetting exercise; cross-reference}
+\XITTitle{请输入中文论文题目}
+\XITEnglishTitle{Please Input English Thesis Title}
+\XITAuthor{请输入姓名}
+\XITStudentID{请输入学号}
+\XITMajor{请输入专业}
+\XITGrade{请输入年级}
+\XITSupervisor{请输入指导教师}
+\XITDate{请输入日期}
+\XITChineseKeywords{关键词一；关键词二；关键词三}
+\XITEnglishKeywords{keyword one; keyword two; keyword three}
 ```
 
-**保留反斜杠、命令名称和成对的大括号，只改大括号里的内容。** 例如填写姓名时，应当修改 `\XITAuthor{...}`，而不是删除整条命令后单独写一个名字。命令中的大括号、反斜杠、方括号都要使用英文半角字符，正文中的中文标点不受这个要求影响。
+例如，填写中文题目时，把 `\XITTitle{请输入中文论文题目}` 改成 `\XITTitle{你的正式论文题目}`。只需要保留反斜杠、命令名称和大括号。题目会用于封面和摘要标题，不必到每一页分别填写。年级按实际入学年级填写，日期按提交要求填写，不要直接沿用示例论文的时间。
 
-`\XITGrade` 填写的是入学年级，不是毕业年份；指导教师、专业名称和封面日期按实际要求填写。中文题目会出现在封面和中文摘要中，英文题目会出现在英文摘要中，因此修改题目后应当一起检查这几处。
+![main.tex 中的字段与空白模板封面对应位置](docs/images/03-cover-fields.png)
 
-![main.tex 中的字段与封面题目、姓名的对应关系](docs/images/03-cover-fields.png)
+*左侧为原始字段，右侧为原包封面局部。题目和姓名的标注框指出对应位置；它们没有被替换成另外一套论文内容。*
 
-*图中的框 1 对应中文题目，框 2 对应姓名。其余信息按相同方式从 main.tex 读取。*
+学校标识由 `\XITLogo{figures/logo.png}` 加载，通常可以保留。确需替换时，把新图片放进 `figures/`，同步修改这条路径。封面题目过长时，要检查最终页面，不要用连续空格强行对齐，也不要为了挤进一行擅自缩短已经确定的正式题目。
 
-学校标识由 `\XITLogo{figures/logo.png}` 加载，日常写作可以保留。确需替换时，把新图片放入 `figures/`，再修改命令中的路径。当前封面题目栏是固定宽度，特别长的题目可能需要调整封面样式，不要堆空格强行对齐，也不要为适应一行而擅自缩短已经确定的论文题目。
-
-### 摘要正文写在 abstract.tex，关键词仍在 main.tex
-
-打开 `chap/abstract.tex`，保留中英文摘要的起止命令，替换中间的文字。下面的内容仅说明填写位置，不是论文摘要范文。
+摘要写在 `chap/abstract.tex`。中文摘要放在 `cnabstract` 环境中，英文摘要放在 `enabstract` 环境中。下面只说明填写位置，不是可以直接使用的摘要范文。
 
 ```tex
 \begin{cnabstract}
-这里填写中文摘要。请使用自己实际完成的研究内容，
-说明研究问题、方法、主要结果和结论。
+这里填写自己的中文摘要。
 \end{cnabstract}
 
 \begin{enabstract}
-Replace this paragraph with the English abstract of your thesis.
+Replace this paragraph with your English abstract.
 \end{enabstract}
 ```
 
-`\begin{cnabstract}` 和 `\end{cnabstract}` 分别表示中文摘要的开始与结束，英文摘要同理。不要删除这些命令，也不需要在里面重新输入论文题目、“摘要”或“Abstract”标题，模板已经负责生成它们。
+保留 `\begin{...}` 和 `\end{...}`，替换中间的文字即可。这一对命令标记了摘要的开始与结束。论文题目、“摘要”和“Abstract”标题已经由模板生成，不要再手动写一遍。
 
-关键词回到 `main.tex` 中修改。中文关键词在 `\XITChineseKeywords{...}` 中填写，用中文分号分隔；英文关键词在 `\XITEnglishKeywords{...}` 中填写，用英文分号分隔。不要在摘要末尾又手写一行关键词，否则会重复。
+**关键词仍在 `main.tex` 中修改。** 中文关键词写在 `\XITChineseKeywords{...}` 中，用中文分号分隔；英文关键词写在 `\XITEnglishKeywords{...}` 中，用英文分号分隔。不要在摘要末尾再补一行关键词，否则会重复。
 
-![摘要正文、题目与关键词的文件位置和 PDF 效果](docs/images/04-abstract-keywords.png)
+![摘要正文与关键词分别来自哪个文件](docs/images/04-abstract.png)
 
-*上方展示两个文件的填写位置，下方是练习项目的中文摘要局部。英文摘要按相同思路填写。*
+*原包空白摘要页的三个部分分别对应论文题目、摘要正文和关键词。AI 示范论文的 abstract.tex 则提供了填入完整内容后的写法。*
 
-现在可以做一次检查：封面信息是否正确，中英文题目是否对应，摘要中是否还留有教学文字，关键词是否只出现了一次。确认这些没有问题后，再开始写正文。
+摘要内容应当对应自己完成的研究和实际结果。示例论文中出现的误差、响应时间和节能率是教学模拟内容，不能只替换姓名和题目就用于正式提交。
 
 <a id="chapters"></a>
-## 写正文，并让目录自动更新
+## 正文写在哪里，目录怎样生成
 
-### 先认识文件之间的关系
-
-下面是**单个论文 ZIP 解压后的主要结构**，不是最外层仓库的结构。仓库中的 `docs/` 用于存放本页配图和练习材料，不是正式论文的章节文件夹。
+下面是单个论文 ZIP 解压后的主要文件。它与 GitHub 仓库根目录不是一回事：仓库里的 `docs/images/` 只存放本 README 的配图，不参与论文编译。
 
 ```text
-main.tex                      全文入口：基本信息、关键词、章节加载顺序
-xitthesis.cls                 样式文件：封面、字体、标题、页边距等
-ref.bib                       参考文献数据库
+main.tex                       全文入口，包含基本信息和章节加载顺序
+xitthesis.cls                  模板样式，控制封面、字体、标题和页边距
+ref.bib                        参考文献数据
 chap/
-    abstract.tex              中英文摘要
-    chapter1.tex              第 1 章
-    chapter2.tex              第 2 章
-    chapter3.tex              第 3 章
-    chapter4.tex              第 4 章
-    chapter5.tex              第 5 章
-    conclusion.tex            总结
-    acknowledgements.tex      谢辞
-    appendixA.tex             第一个附录
-    appendixB.tex             第二个附录
-figures/
-    logo.png                  模板已包含的学校标识
-fonts/
-    README.md                 字体说明
-LATEX_OVERLEAF_GUIDE.md        项目自带的进一步教程
-FORMAT_CHANGELOG.md           版式调整记录
-copy_windows_fonts.ps1        Windows 字体复制脚本
-Makefile                      本地编译命令
-preview.pdf                   随包预览
-main.pdf                      随包编译结果
+    abstract.tex               中英文摘要
+    chapter1.tex               第 1 章
+    chapter2.tex               第 2 章
+    chapter3.tex               第 3 章
+    chapter4.tex               第 4 章
+    chapter5.tex               第 5 章
+    conclusion.tex             总结
+    acknowledgements.tex       谢辞
+    appendixA.tex              第一个附录
+    appendixB.tex              第二个附录
+figures/                       论文图片；空白版目前只有 logo.png
+fonts/README.md                字体配置说明
+LATEX_OVERLEAF_GUIDE.md         压缩包内的进一步教程
+FORMAT_CHANGELOG.md            版式调整记录
+copy_windows_fonts.ps1         Windows 字体复制脚本
+Makefile                       本地编译命令
+main.pdf / preview.pdf         随包提供的已有 PDF
 ```
 
-日常主要使用 `main.tex`、`chap/`、`figures/` 和 `ref.bib`。可以把 `main.tex` 理解为整篇论文的入口，`chap/` 中的文件是各部分内容，`xitthesis.cls` 则决定它们的版式。只是写论文时，先不要修改 `.cls` 文件；姓名和正文也不在这里填写。
+写正文时主要操作 `chap/`，填写信息时操作 `main.tex`。`xitthesis.cls` 是样式文件，姓名和正文不在这里修改。先保留原样；学院有明确的版式调整要求时，再修改对应设置。
 
-### 标题写内容，编号交给模板
-
-打开 `chap/chapter1.tex`，替换章标题、节标题和占位正文。下面的写法会生成一章，其中包含一个节和一个更低一级的小节。
+打开空白模板的 `chap/chapter1.tex`，可以找到章、节和小节的标题。把标题文字和占位段落换掉，就可以开始写第一章。例如：
 
 ```tex
-\chapter{排版练习}
+\chapter{绪论}
 
-\section{标题与段落}
-这里是第一段正文。在源文件中输入文字后，模板会处理首行缩进和段落排版。
+\section{研究背景与意义}
+这里写研究背景。
 
-这里是第二段正文。两段之间在源文件中空一行，不需要输入多余空格。
+这里另起一段，说明研究问题和开展这项工作的意义。
 
-\subsection{研究背景}
-这里填写研究背景。标题中的数字由模板自动生成，不要在标题文字中重复填写编号。
+\section{相关研究}
+
+\subsection{已有方法}
+这里介绍与课题有关的已有研究。
 ```
 
-`\chapter` 表示章，`\section` 表示章下面的节，`\subsection` 再向下一层。它们分别生成“第 1 章”“1.1”“1.1.1”这样的编号，所以应当写 `\section{研究背景}`，不要写 `\section{1.1 研究背景}`。
+`\chapter` 表示章，`\section` 是章下面的节，`\subsection` 再向下一层。标题中的编号由模板生成。写 `\section{研究背景与意义}` 就够了，不要写成 `\section{1.1 研究背景与意义}`。
 
-普通中文直接输入即可。**段落之间空一行**；只在源文件里按一次回车，通常仍然属于同一段。模板会处理首行缩进，不要用连续空格制造缩进，也不要在每段末尾加 `\\`，后者表示强制换行，不等同于正常分段。
+![空白模板章、节、小节命令与实际编号对照](docs/images/05-chapter.png)
 
-![章、节、小节编号，以及空行分段的源码与 PDF 对照](docs/images/05-headings-paragraphs.png)
+*图中使用原包的占位标题。写自己的论文时修改大括号中的标题文字，前面的“第 1 章”“1.1”“1.1.1”会随结构更新。*
 
-*截图中只有标题文字来自大括号，前面的编号由模板生成。实际论文应按课题内容命名章节，不必照搬“排版练习”。*
+普通中文直接输入。**两段之间空一行**，模板会处理首行缩进。在源文件中只按一次回车，通常仍属于同一段；每段末尾也不用加 `\\`，它是强制换行命令，不能代替正常分段。
 
-源文件里以 `%` 开始的内容是注释，该行后面的内容不会进入 PDF。需要在普通正文中显示半角百分号时，写成 `\%`；下划线、与号和井号分别写成 `\_`、`\&`、`\#`。例如“误差为 5%”和变量名可以这样写：
+源文件中以 `%` 开始的内容是注释，该行后面的内容不会显示在 PDF 中。空白模板里的图片、表格等代码示例也使用了这种写法。启用一段示例时，需要去掉代码行前面的 `%`，但旁边的中文操作说明仍应保留为注释。
+
+半角 `%`、`_`、`&`、`#` 在 LaTeX 中有特殊用途。普通正文里需要显示它们时，分别写成 `\%`、`\_`、`\&`、`\#`，例如：
 
 ```tex
-误差为 5\%。变量名为 sensor\_value。
+误差为 5\%。程序中的变量名为 sensor\_value。
 ```
 
-数学公式中的下划线另有用途，后面会单独说明。复制 README 中的示例时，只复制代码块内部的文字，不要把代码块边界的三个反引号和 `tex` 字样一起粘贴进去。从其他文档粘贴正文后，出现报错时先检查特殊字符和大括号是否完整。
+命令中的反斜杠、大括号和方括号应当使用英文半角字符。复制本页代码时，只复制代码块里面的内容，不要把外侧的三个反引号和 `tex` 字样一起粘进去。
 
-### 增减章节，要同时修改 main.tex
+### 增加或删除章节
 
-`main.tex` 中的下面几行决定正文加载哪些文件以及它们的顺序。文件名省略了 `.tex`，`\include{chap/chapter1}` 对应的实际文件就是 `chap/chapter1.tex`。
+`main.tex` 中的加载命令决定哪些章节进入论文，以及它们的顺序。下面这些行已经存在，不必重复添加。
 
 ```tex
 \include{chap/chapter1}
@@ -196,232 +171,261 @@ main.pdf                      随包编译结果
 \include{chap/conclusion}
 ```
 
-只需要四章时，把第五章的入口改为 `% \include{chap/chapter5}` 即可，文件可以暂时保留。需要第六章时，在 `chap/` 中新建 `chapter6.tex`，写入 `\chapter{补充实验与分析}` 和正文，再在总结之前加入 `\include{chap/chapter6}`。只新建文件而不添加入口，不会让它自动出现在论文里。
+只需要四章时，把第五章入口改为 `% \include{chap/chapter5}`。需要第六章时，在 `chap/` 新建 `chapter6.tex`，写好 `\chapter{你的章标题}` 和正文，再在总结之前加入 `\include{chap/chapter6}`。仅仅新建文件，不会让它自动出现在论文中。
 
-章节编号跟随实际加载顺序，不是根据文件名中的数字决定。章节文件中也不需要重复写 `\documentclass`、`\begin{document}` 或 `\end{document}`，这些整篇文档的结构已经由 `main.tex` 提供。
+新章节只放章标题和正文，不要再复制 `\documentclass`、`\begin{document}`、`\end{document}`；这些整篇文档的结构已经由 `main.tex` 提供。
 
-![由章节标题和编译页码生成的目录](docs/images/06-contents.png)
+![示例论文的章节入口、正文标题与目录对应关系](docs/images/06-project-structure.png)
 
-*这是配图练习项目的目录。正式论文的目录长度和页码会随内容变化。*
+*目录来自 AI 示范论文随附 PDF。目录条目读取正文标题，页码由编译结果确定，不是在 main.tex 中手工填写。*
 
-模板会根据已加载的标题生成目录。增加或删除内容后，先完成编译，再核对目录页码和交叉引用；不要去修改 PDF 中的目录文字。整章之间自动换页是当前组织方式的正常行为，不要靠不断添加空行把下一章推到新的一页。
+章节编号取决于加载顺序，不是文件名中的数字。修改标题、增减章节或改变分页后，需要重新编译以更新目录。章节之间自动换页是当前模板的正常行为，不必添加空行把标题推到下一页。
 
 <a id="objects"></a>
-## 把图片、表格和公式放进论文
+## 图片、表格、公式和代码怎样放进正文
 
-### 用项目已有的图片完成第一次插图
+下面使用 AI 示范论文中已经存在的内容讲解。可以把示例版和空白版分开打开，一边看写法，一边修改自己的论文，不要把两套同名文件混在一个项目里。
 
-初次练习直接使用空白模板已经包含的 `figures/logo.png`，这样不需要额外准备图片。将下面的代码放在某一章的正文位置，不要放进 `xitthesis.cls`，也不要放在 `\begin{document}` 之前。
+### 先对照示例插入一张图
+
+在 **AI 示范论文**的 `chap/chapter2.tex` 中搜索 `fig:system-architecture`，可以找到系统总体架构图的引用和插图代码。对应图片是示例版已有的 `figures/fig_system_architecture.png`。
 
 ```tex
-图~\ref{fig:logo} 展示了项目自带的学校标识，仅用于插图练习。
-
 \begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.6\textwidth]{figures/logo.png}
-    \caption{学校标识（仅供插图练习）}
-    \label{fig:logo}
+  \centering
+  \includegraphics[width=0.96\textwidth]{figures/fig_system_architecture.png}
+  \caption{系统总体架构示意图}
+  \label{fig:system-architecture}
 \end{figure}
 ```
 
-`\includegraphics` 负责加载图片，`width=0.6\textwidth` 表示宽度为正文区域宽度的 60%。调大或调小这个数值即可改变显示大小。一般只指定宽度，让高度随比例变化，避免同时指定不合适的宽高后把图片拉伸。
+`\includegraphics` 后面的大括号是图片路径，`width=0.96\textwidth` 将图片宽度设为正文区域的 96%。一般只设置宽度，让高度按原比例变化，避免把图片拉伸。`\caption` 是图题，`\label` 给这张图设置一个供正文引用的标签。
 
-`\caption` 设置图片标题，`\label{fig:logo}` 为图片设置内部标签。正文中的 `\ref{fig:logo}` 读取同一个标签对应的图号。**标签放在 `\caption` 后面，每张图使用不同的标签。** `fig:` 只是方便区分图片标签的命名习惯，不是文件路径；只有 `\includegraphics` 中的路径需要对应真实图片文件。
-
-![图片路径、图题、标签与正文引用的对应关系](docs/images/07-figure-reference.png)
-
-*图中的两处编号指向同一张图片。前面增加新图后，完成编译即可更新编号，不必手改“图 1-1”。在自己的第 2 章中使用时，图号可能是“2-1”，以实际编译结果为准。*
-
-换成自己的图片时，先上传到 `figures/`。例如确实上传了 `system.png`，再把代码中的路径改为 `figures/system.png`，同时修改图题以及 `\label`、`\ref` 中的标签。文件名建议使用英文、数字和下划线，路径中的大小写和扩展名保持一致。空白模板没有自带 `system.png`，不能只改路径却没有上传文件。
-
-`[htbp]` 给出了允许尝试的排放位置，图片可能出现在当前位置、页顶、页底或单独的浮动页，不保证紧贴代码所在的行。先检查图片大小和正文引用，再看最终排版，不要用大量空行“固定”图片。图像尽量使用清晰的原始导出文件；流程图或结构图能导出 PDF 时，也可以使用 PDF 文件，避免把模糊截图反复放大。
-
-### 三线表直接用代码填写，不必做成截图
-
-下面是一张三列表格。内容只用于练习写法，不包含真实测试结果，可以放到 `chap/chapter2.tex` 或其他需要它的章节中。
+正文不需要手写“图 2-2”，而是使用同一个标签：
 
 ```tex
-测试项目见表~\ref{tab:items}。
+系统总体架构如图~\ref{fig:system-architecture} 所示。
+```
 
+`\ref` 会读取实际编号，`~` 是不换行空格，用于避免“图”和编号被拆到两行。标签放在 `\caption` 后面，并且每张图使用不同的标签。复制第二个插图环境时，记得同时修改路径、图题和标签。
+
+![示例版系统架构图：图片路径、图题、标签与 PDF 效果](docs/images/07-figure.png)
+
+*右侧截取自 AI 示范论文原包 PDF，第 11 页。这里展示的是模拟系统架构，正文中的“图 2-2”由模板生成。*
+
+回到空白模板时，要先上传图片。**空白模板没有 `fig_system_architecture.png`，也没有注释里写的 `example.png`。** 照着示例学习，可以从 AI 示范论文复制相应图片到空白版 `figures/`；正式写作则上传自己的图片，并修改路径、图题和正文分析。只复制代码而没有图片文件，会出现找不到文件的错误。
+
+文件名建议用简短英文、数字和下划线，扩展名、大小写都与实际文件保持一致。`[htbp]` 允许图片在当前位置、页顶、页底或浮动页排放，图片移到下一页不一定是错误。先检查图片大小和正文引用，再看最终版面，不要靠连续回车固定位置。关于浮动位置可参照 [Overleaf 插图说明][images]。
+
+### 三线表的写法
+
+仍在 AI 示范论文的 `chap/chapter2.tex` 中，搜索 `tab:performance-index`，能找到“系统主要性能指标”表。下面是原有代码，表内数值是示例设计目标，不是经过本教程验证的实验数据。
+
+```tex
 \begin{table}[htbp]
-    \centering
-    \caption{测试项目与记录内容（排版练习）}
-    \label{tab:items}
-    \begin{tabular}{lll}
-        \toprule
-        测试项目 & 记录内容 & 说明 \\
-        \midrule
-        光照检测 & 传感器读数 & 填写实际记录 \\
-        控制响应 & 响应时间 & 填写实际记录 \\
-        通信测试 & 接收情况 & 填写实际记录 \\
-        \bottomrule
-    \end{tabular}
+  \centering
+  \caption{系统主要性能指标}
+  \label{tab:performance-index}
+  \begin{tabular}{p{3.2cm}p{4.2cm}p{5.2cm}}
+    \toprule
+    指标类别 & 设计目标 & 说明 \\
+    \midrule
+    光照采样误差 & 不大于 5\% & 与标准照度计读数进行对比 \\
+    人体检测响应时间 & 不大于 \SI{0.5}{s} & 人员进入检测区域后的响应时间 \\
+    异常电流报警时间 & 不大于 \SI{1}{s} & 电流超过阈值后的报警响应时间 \\
+    调光输出范围 & 0--100\% & PWM 占空比可调 \\
+    连续运行稳定性 & 不少于 \SI{2}{h} & 无死机、误报警和通信中断 \\
+    数据记录周期 & \SI{1}{s}--\SI{60}{s} 可设 & 根据存储容量灵活设置 \\
+    \bottomrule
+  \end{tabular}
 \end{table}
 ```
 
-`{lll}` 表示三列且全部左对齐，`c` 表示居中，`r` 表示右对齐。每行使用 `&` 分隔单元格、使用 `\\` 结束，因此这里每一行有两个 `&`。增加一列时，要同时修改列定义和每行内容，不能只在某一行额外增加一个单元格。
+`tabular` 后的三个 `p{...}` 定义了三列宽度，这类列允许长文字换行。每一行用 `&` 分隔单元格，用 `\\` 结束，因此这张表每行有两个 `&`。增加一列时，要同时调整列定义和每行内容，不能只在某一行多写一个单元格。
 
-`\toprule`、`\midrule` 和 `\bottomrule` 分别画出顶部、表头下方和底部的横线，模板已经加载所需的 `booktabs` 宏包，不需要重复加载。表题放在表格上方，表格标签同样放在 `\caption` 后面。
+`\toprule`、`\midrule` 和 `\bottomrule` 分别生成顶部、表头下方和底部的横线。模板已经加载 `booktabs`，不需要再次加载。表题放在表格上方，标签紧跟 `\caption`。正文引用写成 `表~\ref{tab:performance-index}`。
 
-![三线表代码与编译结果对照](docs/images/08-three-line-table.png)
+![三线表原始代码节选与示例 PDF 中的横线位置](docs/images/08-table.png)
 
-*先理解列数、单元格分隔符和换行符，再替换成自己的表格内容。*
+*配图只截取部分源码，完整环境在上面的代码块中。三条标注线对应 top、mid、bottom 三个命令。*
 
-表格太宽时，优先精简冗长文字，或将某一列改成 `p{6cm}` 这样的固定宽度列，让内容可以换行。例如 `{llp{6cm}}` 表示前两列左对齐，第三列宽度为 6 cm，具体数值仍要按整张表调整。不建议一开始就把整张表缩到字号过小。普通 `table` 不能自动跨页，确需长表时可以进一步查看模板已加载的 `longtable` 用法。
+在自己的论文中替换表格标题、数据和说明。表格太宽时，先精简单元格内容、调整列宽，让文字能够换行，不要直接把整张表缩到难以阅读。
 
-### 公式与单位：区分行内公式和独立公式
+### 公式的编号与引用
 
-句子中的短公式可以写在 `\(` 和 `\)` 之间。需要单独成行并编号时，使用 `equation` 环境；环境里面不需要再套一层 `\(...\)`。
+AI 示范论文的 `chap/chapter3.tex` 中有一个电流采样公式，搜索 `eq:current-sample` 即可找到：
 
 ```tex
-句子中的公式可以写成 \(P = UI\)。
-
 \begin{equation}
-    P = UI
-    \label{eq:power}
+  I = k\left(U_{adc}-U_0\right),
+  \label{eq:current-sample}
 \end{equation}
-
-式~\eqref{eq:power} 中，\(P\) 为功率，\(U\) 为电压，\(I\) 为电流。
 ```
 
-`\eqref` 读取公式编号，并自动带上括号，不需要再在它外面手工加一组括号。公式中的下标使用 `_`，上标使用 `^`，包含多个字符时用大括号括起来，例如 `\(x_{max}\)`；分式使用 `\frac{分子}{分母}`。这些写法应当放在数学环境里，不要直接当作普通正文输入。
+`equation` 生成独立成行的公式和编号。正文用 `式~\eqref{eq:current-sample}` 引用它，`\eqref` 已经带括号，不需要再手工补一对括号。
 
-模板已加载 `siunitx`，数字和单位可以统一这样写。下面的数值仅为格式示例，不是实验参数。
+![公式源代码、正文引用与示例 PDF 中的编号](docs/images/09-equation.png)
+
+*示例 PDF 中该公式编号为 (3-1)。放到自己的论文后，编号会根据所在章节和公式顺序变化，不应照着截图手填。*
+
+写在句子中的短公式可以用 `\(` 和 `\)` 包起来，例如 `电功率为 \(P=UI\)`。数学环境中的 `_` 表示下标，`^` 表示上标；多个字符需要用大括号括起来，如 `x_{max}`。分式写作 `\frac{分子}{分母}`。不要在 `equation` 中再嵌套一层 `\(...\)`，也不要在公式内部用空行分段。
+
+模板已经加载 `siunitx`，数字和单位可以统一写成下面的形式。这些数值只展示写法，正式使用时按实际参数填写。
 
 ```tex
 工作电压为 \SI{3.3}{\volt}。
-测量长度为 \SI{10}{\milli\metre}。
+长度为 \SI{10}{\milli\metre}。
 环境温度为 \SI{25}{\degreeCelsius}。
 ```
 
-![公式编号、正文引用及数字单位的排版效果](docs/images/09-equations-units.png)
+### 程序代码放在哪里
 
-*图表、公式的标签都应避免重名。改变顺序后，先完成编译，再确认引用是否更新。*
+短代码可以放在正文，较长的关键实现可以放附录。模板使用 `listings` 排版代码，不会替你运行程序。在 AI 示范论文的 `chap/appendixA.tex` 中搜索 `code:uart`，可以看到已有的串口日志示例。
 
-空白模板在 `chapter2.tex` 中还保留了一些被 `%` 注释掉的图表和公式示例。要启用其中一段，需要去掉整段有效代码前面的注释符号，并替换实际内容；只去掉 `\begin` 前面的 `%`、却保留 `\end` 的注释，会破坏环境配对。
+```tex
+\begin{lstlisting}[language=C,caption={串口日志输出示例},label={code:uart}]
+printf("lux=%.1f,pir=%d,current=%.2f,mode=%d,state=%d\r\n",
+       lux_value,
+       pir_state,
+       current_value,
+       system_mode,
+       light_state);
+\end{lstlisting}
+```
+
+这里的 `language=C` 指定代码语言，`caption` 是标题，`label` 用于引用。在 `lstlisting` 里面保留程序原本的写法，不要把代码中的 `%`、`_` 按普通 LaTeX 正文转义。这与前面写正文时的规则不同。
+
+![AI 示范论文原有代码环境与附录页面](docs/images/11-final-check.png)
+
+*原包 PDF 将代码标题显示为 Listing。教程保留模板的实际输出，没有将它改画成其他标题样式。*
+
+阅读示例可以学习如何排代码，但示例片段依赖的变量和函数并不都在这段代码里。复制到程序工程前，还需要按自己的实现补齐上下文，不能把“能够排成 PDF”理解为“程序已经验证可运行”。
 
 <a id="references"></a>
-## 从 ref.bib 到正文中的参考文献
+## 参考文献怎样添加
 
-参考文献有两处需要编辑：`ref.bib` 保存资料的完整信息，正文中的 `\cite{...}` 标明哪里引用了哪篇资料。先把这两处对应起来，再考虑文献种类和具体字段，就容易理解得多。
+参考文献涉及两个位置：`ref.bib` 记录资料的信息，正文中的 `\cite{...}` 指明引用了哪一条。最容易理解的办法，是对照示例版里已经连起来的两处内容。
 
-下面是一条**虚构的格式练习条目**。可以用它测试流程，但正式论文必须替换为自己实际查阅的文献；作者、题目、期刊和年份都不能直接沿用。将它添加到 `ref.bib` 中已有条目的后面，不要放在另一个条目的大括号内部。
+打开 **AI 示范论文**的 `ref.bib`，搜索 `tan2017-cprogramming`，能找到下面这条记录。这里照录已有条目说明字段关系，不代表对示例数据库进行了文献准确性审查。
 
 ```bibtex
-@article{demo-reference,
-  author  = {示例作者甲 and 示例作者乙},
-  title   = {参考文献格式练习条目},
-  journal = {示例期刊},
-  year    = {2026},
-  volume  = {10},
-  number  = {2},
-  pages   = {1--8},
-  note    = {虚构条目，仅供排版练习}
+@book{tan2017-cprogramming,
+  author    = {谭浩强},
+  title     = {C程序设计},
+  edition   = {5},
+  publisher = {清华大学出版社},
+  year      = {2017},
+  address   = {北京}
 }
 ```
 
-`@article` 表示期刊论文，紧跟着的 `demo-reference` 是文献键，也就是这条记录的唯一名称。文献键建议使用英文字母、数字和连字符，不能与其他条目重复。多名作者使用 `and` 分隔，相邻字段之间保留英文逗号。`note` 是否显示取决于文献样式，不能靠这个字段代替对示例资料的检查和删除。
+`@book` 表示书籍，`tan2017-cprogramming` 是文献键，相当于这条资料的内部名称。`author`、`title`、`year` 等字段分别记录作者、题目和年份。文献键可以自行命名，建议使用英文、数字和连字符，不要与其他条目重复。
 
-接着在任意已加载的正文文件中加入：
-
-```tex
-这句话仅用于演示文献引用\cite{demo-reference}，不表达实际研究结论。
-```
-
-正文中的文献键必须与 `ref.bib` 完全一致。多条文献可以写成 `\cite{文献键一,文献键二}`，前提是这些记录都已经存在。不要手写 `[1]`，也不要把已经排好版的一整段参考文献文字直接粘进 `.bib` 文件当作条目。
-
-![ref.bib 中的条目、正文引用及文末参考文献的对应关系](docs/images/10-bibliography.png)
-
-*这张图展示的是引用流程。图中的作者、题名和期刊都是明确标记的虚构教学占位内容。*
-
-本模板已经在 `main.tex` 中设置 `backend=biber` 和 `style=gb7714-2015`，使用 Biber 处理文献，并按所选样式排版。这里说明的是**模板当前的配置**，不是把它称作最新标准，也不代表无需核对学院当年的文献要求。不要另从教程中复制一套 BibTeX、`natbib` 或手工文献环境混进来。[Overleaf 的 biblatex 说明][overleaf-biblatex]介绍了这套工作方式。
-
-在 Overleaf 中通常由平台的构建流程调用文献处理工具，不需要在正文里输入 `biber main`。本地使用时，则应依次执行 `XeLaTeX → Biber → XeLaTeX → XeLaTeX`，具体命令见后文。出现文献键未变成编号的情况，应先核对条目、引用名称和日志；一直重复 XeLaTeX 不能替代缺失的 Biber 步骤。
-
-文末参考文献由 `\XITPrintBibliography` 输出，当前安排在“总结”和“谢辞”之间。只录入 `.bib` 而从未引用的文献，默认不会进入列表。`main.tex` 里的 `% \nocite{*}` 取消注释后会列出数据库中的全部条目，可以用于检查录入结果，但不应代替正文真正需要的引用。
-
-书籍、会议论文、学位论文和网页资料应使用相应条目类型，不能全套期刊论文格式。可以从数据库或文献管理工具导出 BibTeX 作为录入起点，再核对作者、题名、卷期、页码、年份以及必要的链接或访问日期。空白模板原有的 `sample-reference` 同样是占位示例，定稿时应清理无效条目和示例引用。
-
-<a id="backmatter"></a>
-## 完成总结、谢辞和附录
-
-总结在 `chap/conclusion.tex` 中填写。保留开头的 `\XITConclusion`，将它下面的占位文字替换为自己的总结。这条命令已经生成标题并加入目录，不需要再写一遍 `\chapter{总结}`。
-
-谢辞在 `chap/acknowledgements.tex` 中填写，保留 `\XITAcknowledgement`，替换其后的正文即可。当前模板使用的标题是“谢辞”；所在学院有其他规定时，再统一调整样式或标题设置，不要在正文中叠加另一个标题。
+再打开示例版 `chap/chapter1.tex`，搜索同一个文献键，能看到正文这样调用它：
 
 ```tex
-% chap/conclusion.tex
-\XITConclusion
-这里填写全文总结。
+嵌入式系统的软件实现通常离不开 C 语言程序设计基础\cite{tan2017-cprogramming}。
 ```
+
+![ref.bib、正文中的 cite 与文末条目的对应关系](docs/images/10-bibliography.png)
+
+*图中为示例已有的文献条目和 PDF 局部。文献编号取决于正文引用顺序，不能把截图中的 [2] 当作固定编号。*
+
+回到空白模板，把自己实际阅读并准备引用的资料录入 `ref.bib`，再在相关正文中使用对应的 `\cite{文献键}`。多个作者在 BibTeX 字段中用 `and` 分隔；同时引用多条资料，可以写 `\cite{key-one,key-two}`，但这两个键必须已经存在。不要把带 `[1]` 的整段参考文献文字直接粘进 `ref.bib`，那不是数据库条目格式。
+
+期刊论文用 `@article`，会议论文用 `@inproceedings`，学位论文用 `@thesis`，网页资料用 `@online`。不同类型的字段不同，可以从实际检索平台导出 BibTeX 后再核对，不要把所有资料都套成书籍。空白模板的 `sample-reference` 是占位条目；AI 示范论文中也有写着“某某大学”的记录，不能把整份示例文献库直接当作已核验的参考资料。
+
+本模板在 `main.tex` 中使用 `backend=biber` 和 `style=gb7714-2015`。前者指定文献处理程序，后者指定当前排版样式。已经有这套配置，就不要再从其他教程复制一套 `natbib` 或手工参考文献环境进来混用。原理和更多条目写法见 [Overleaf 的 biblatex 说明][bibliography]。
+
+参考文献由 `\XITPrintBibliography` 输出，位置在“总结”和“谢辞”之间。通常只需要修改数据库和正文引用，不需要到 PDF 末页手工维护编号。未被引用的条目默认不出现在列表中，空白模板初始列表为空也可能是这个原因。
+
+若只想检查数据库里的全部条目，可以临时取消 `main.tex` 中 `% \nocite{*}` 的注释。它不能代替正文引用。文献显示异常时，应检查条目语法、文献键和 Biber 日志；单纯反复运行 XeLaTeX 不会补上缺失的文献处理步骤。
+
+## 总结、谢辞和附录
+
+总结写在 `chap/conclusion.tex`，保留开头的 `\XITConclusion`；谢辞写在 `chap/acknowledgements.tex`，保留 `\XITAcknowledgement`。这两个命令已经负责生成标题和目录条目，不需要另外再加 `\chapter{总结}` 或手写一行“谢辞”。
+
+附录文件是 `chap/appendixA.tex` 和 `chap/appendixB.tex`。空白模板中已有 `\XITAppendix{附录标题}`，修改大括号中的文字，再填写内容即可。例如：
 
 ```tex
-% chap/acknowledgements.tex
-\XITAcknowledgement
-这里填写谢辞。
+\XITAppendix{系统关键源代码}
+
+这里填写需要补充的说明，并按前文的写法插入代码。
 ```
 
-附录适合放完整代码、较长推导、问卷和补充记录。打开 `chap/appendixA.tex`，使用 `\XITAppendix{附录标题}` 生成附录标题和目录条目。模板会依次生成“附录一”“附录二”，大括号里只写题目，不要把附录序号也写进去；本模板使用自己的附录命令，无需额外再加其他教程中的 `\appendix`。
+模板会生成“附录一 系统关键源代码”，所以不要把“附录一”再次写进大括号，也不需要另外添加 `\appendix`。AI 示范论文的第一个附录展示关键代码，第二个附录说明模拟图片的用途和替换位置，都可以作为结构参考。
 
-代码可以放在 `lstlisting` 环境中。以下例子使用 Python，`language=C` 则适用于 C 语言。`caption` 是代码标题，`label` 是正文引用时使用的标签。
-
-```tex
-\XITAppendix{程序排版练习}
-
-\begin{lstlisting}[language=Python,caption={平均值计算示例},label={code:average}]
-def average(values: list[float]) -> float:
-    if not values:
-        raise ValueError("values must not be empty")
-    return sum(values) / len(values)
-\end{lstlisting}
-
-代码~\ref{code:average} 展示了程序排版。LaTeX 不会运行这段程序。
-```
-
-这段代码示例按 [Python 3.9 起支持的内置集合类型标注][python-generics]书写；在 LaTeX 里它只是被排版成文本，并没有被执行。当前样式的代码标题默认显示 `Listing`，正文仍可用中文“代码”配合 `\ref` 引用。若把代码放在正文，复制 `lstlisting` 环境及其引用即可，不要把 `\XITAppendix` 一起放进去。正文通常保留必要的关键片段，长程序再放到附录。
-
-![附录标题、程序代码和代码引用的实际排版](docs/images/11-appendix-code.png)
-
-*当前模板的附录序号由命令自动递增。示例程序只用于演示代码环境。*
-
-只保留一个附录时，在 `main.tex` 中注释掉第二个附录的入口。完全不需要附录时，把下面两行都注释掉：
+没有附录时，在 `main.tex` 中注释入口，而不是只删掉附录正文：
 
 ```tex
 % \include{chap/appendixA}
 % \include{chap/appendixB}
 ```
 
-不要只清空附录正文，却留下标题命令和加载入口，否则仍可能生成一个空附录。声明页的签名和日期也要按学院要求处理，模板生成了声明页面，并不等于已经完成签署。
+仅保留一个附录，就只注释第二行。删除文件但不修改入口会导致找不到文件；只清空正文但保留标题，则可能留下一个空附录。
 
-<a id="troubleshooting"></a>
-## 编译出错时，先检查刚改过的地方
+<a id="help"></a>
+## 出错时怎样找原因
 
-每写完一小段、插入一张图或录入一组文献，就编译一次。这样出现问题时，通常能把范围缩小到最近的修改。打开日志后先看**最早出现的实质错误**，后面几十条提示可能都由同一个遗漏引起，不要同时改动许多无关设置。
+每完成一小段内容、一个图表或一组引用就编译一次，比全文写完后集中排错容易。出现错误时，先找日志中的**第一个实质错误**，检查对应文件附近刚改过的内容。后面的很多提示可能只是同一个问题引起的连锁反应。
 
-**提示需要 XeLaTeX，或中文显示异常。** 出现 `This class requires XeLaTeX` 时，直接检查编译器。其他中文问题还应检查文件是否保存为 UTF-8、字体是否可用，不是所有异常都能靠换编译器解决。编辑器叫什么名字，并不决定它实际调用了哪个编译程序。
+下面收起了较长的排错说明，遇到对应问题再展开查看。
 
-**提示找不到文件或字体。** `File ... not found` 后面的文件名很重要：缺图片时核对上传情况和路径；缺 `xitthesis.cls` 或章节文件时核对项目是否完整；缺 `.sty` 文件时检查宏包安装。`fontspec` 的报错则要看具体字体名称，缺少字体和图片路径错误不是同一个问题。
+<details>
+<summary>编译失败：编译器、文件、字体或命令报错</summary>
 
-**提示命令不存在或括号不匹配。** 出现 `Undefined control sequence`，先检查命令拼写，或是否复制了模板没有加载的宏包命令。出现 `Missing $ inserted`，检查普通正文里是否有未转义的下划线，或数学内容是否缺少数学环境。还应核对 `\begin{...}`、`\end{...}` 和大括号是否成对，包括有没有误把结尾命令注释掉。
+看到 `This class requires XeLaTeX`，先把编译器改成 XeLaTeX。文件开头写了 `% !TeX program = XeLaTeX` 并不等于所有编辑器都会自动采用这项设置，仍要检查实际编译配置。
 
-**图表显示 `??`，或文献没有变成编号。** 图表先核对 `\label` 与 `\ref` 的名称、重复标签以及章节加载入口，再完成编译更新引用。文献还要检查 `ref.bib` 和 Biber。名称拼错、条目语法错误、图片缺失，都不会因为多编译几遍而自动修复。
+看到 `File ... not found`，看清缺少的文件名。`xitthesis.cls` 找不到，检查项目是否上传完整；图片找不到，检查是否真正上传、路径是否正确、大小写是否一致。只上传 `main.tex` 不足以编译整篇论文。
 
-**编译通过，但 PDF 没变化或目录未刷新。** 先确认正在看本次生成的 PDF，而不是随包预览；再确认修改文件仍被 `main.tex` 加载。源文件正确而辅助信息没有更新时，可在 Overleaf 的重新编译菜单中使用 `Recompile from scratch` 清理缓存后重建。这个操作不会修复源代码错误，具体入口见[清理项目缓存][overleaf-cache]。
+`fontspec` 错误需要看日志中具体缺少哪种字体。字体回退也依赖环境里存在相应字体，不能把任何机器上的字体错误都归结为“没选 XeLaTeX”。本地环境与上传字体的说明在下一节。
 
-**有警告，或图片位置与预期不同。** `Overfull \hbox` 常提示某一行过宽，应结合 PDF 检查长网址、表格或不可断行的内容；浮动图片移到页顶或下一页则未必是错误。成功生成 PDF 不等于没有排版问题。字体回退提示、书签提示和阻断编译的错误也应分开判断，不要看到一条警告就删除整个样式文件。
+`Undefined control sequence` 常见于命令拼错，或从其他教程复制了需要额外宏包的命令。`Missing $ inserted` 可以先检查普通正文里未转义的下划线，以及是否把数学内容放错环境。环境不匹配时，检查 `\begin{...}` 和 `\end{...}` 是否成对，大括号是否遗漏。
 
-配图练习项目已按完整顺序在本地编译生成 14 页 PDF，具体环境和保留的警告写在[练习说明](docs/examples/README.md)中。这说明对应代码走通了引用流程，不代表已经在每个 Overleaf 版本和每台电脑上测试过。
+</details>
+
+<details>
+<summary>引用显示 ??、文献不显示，或者目录没有更新</summary>
+
+图表和公式显示 `??`，先核对 `\label` 与 `\ref` / `\eqref` 中的名称是否一致、标签是否重复、相关章节是否被加载。图表标签应放在 `\caption` 后面。源文件无误后，再编译以刷新交叉引用。
+
+文献问题还要检查 `ref.bib` 是否有相应记录、正文是否确实引用了它，以及 Biber 是否成功完成。文献键拼错或数据库括号不配对，都不是多点几次编译就能解决的。
+
+目录页码在增删内容后需要重新计算。确认编译没有实质错误后，再编译一次；缓存确实异常时，Overleaf 可以通过重新编译菜单中的 `Recompile from scratch` 清理生成文件后重编译，具体入口见[官方缓存说明][cache]。清缓存不会修复源代码错误。
+
+</details>
+
+<details>
+<summary>源文件已经保存，PDF 却没有变化</summary>
+
+确认当前看的是本次生成的 PDF，而不是随包提供的 `preview.pdf` 或保存在电脑上的旧文件。保存源文件与成功编译是两件事，编译失败后，预览区可能仍显示之前的内容。
+
+再检查 `main.tex` 有没有加载你修改的章节。例如 `% \include{chap/chapter3}` 前面有 `%`，这一章就不会进入论文。分开打开空白版和示例版时，也要确认自己正在编辑哪一个项目。
+
+</details>
+
+<details>
+<summary>图片跑到下一页、表格越过页边，或出现 Overfull 提示</summary>
+
+`figure` 和 `table` 是浮动环境，`[htbp]` 给的是可选位置，不是固定坐标。页面剩余空间不足时，图片或表格可能移到其他位置。先检查尺寸和附近正文，尽量不要用空行推挤版面。
+
+表格过宽可以精简单元格、调整列宽，或者按论文要求另行处理宽表。`Overfull \hbox` 常表示某行内容超出可用宽度，长网址、长英文词和过宽表格都可能触发。它不一定阻断编译，但应结合 PDF 检查是否越界。
+
+示例论文有些位置使用了 `[H]` 或 `\FloatBarrier`。示例版的样式文件加载了 `float` 和 `placeins`，空白版没有加载这两个包。直接把这些命令复制过去，可能报错。第一次插图先沿用本页的 `[htbp]` 写法；确实需要这些定位功能时，再在空白版 `main.tex` 的 `\begin{document}` 之前加入对应的 `\usepackage{float}` 或 `\usepackage{placeins}`，并检查分页效果。
+
+</details>
 
 <a id="local"></a>
-## 本地编译与字体设置
+## 本地编译与字体
 
-只使用 Overleaf 且当前能正常编译的同学，可以先跳到下一节。字体和本地环境应在需要时处理，不必为了开始写正文先改一遍全部设置。
+只使用 Overleaf 时，可以先跳过本地安装。需要在自己电脑上编译，再展开下面的说明。
 
-### 本地需要 LaTeX 环境，不只是编辑器
+<details>
+<summary>安装环境并执行 XeLaTeX 与 Biber</summary>
 
-可以使用 [TeX Live][texlive]，macOS 也可以使用 [MacTeX][mactex]。安装的环境需要提供 `xelatex`、`biber` 以及模板使用的宏包和字体。只安装一个代码编辑器，并不能完成论文编译。
+本地需要 LaTeX 发行版，而不只是文本编辑器。可以安装 [TeX Live][texlive]，macOS 用户也可以使用 [MacTeX][mactex]。环境应当能调用 `xelatex` 和 `biber`，并具备模板所用的宏包与字体。
 
-将整个论文项目解压，在包含 `main.tex` 的目录打开终端。如果用命令进入目录，路径中包含空格时加英文双引号。确认当前位置后，依次执行：
+完整解压单个论文 ZIP，在包含 `main.tex` 的目录中打开终端，依次执行：
 
 ```bash
 xelatex main.tex
@@ -430,56 +434,45 @@ xelatex main.tex
 xelatex main.tex
 ```
 
-第一遍 XeLaTeX 生成正文和辅助信息；Biber 根据引用处理 `ref.bib`；后两遍 XeLaTeX 将文献、目录和交叉引用结果写回 PDF。注意第二条是 `biber main`，不是 `biber ref.bib`。某一步发生阻断编译的错误时，应先解决它，再继续后续步骤。
+第一遍 XeLaTeX 生成正文和辅助信息，Biber 读取文献数据，后两遍 XeLaTeX 把文献、目录和交叉引用写回 PDF。`biber main` 处理的是当前论文任务，不是执行 `biber ref.bib`。完成后生成 `main.pdf`。
 
-终端提示找不到 `xelatex` 或 `biber`，说明应检查发行版安装与命令路径，而不是修改论文内容。完整编译后，输出文件为当前项目中的 `main.pdf`。`.aux`、`.toc`、`.bcf`、`.bbl` 等是构建过程中的辅助文件，不是日常写作入口，不需要手工编辑；排错前可以先保留日志。
+某一步出现阻断编译的错误，先解决再继续。提示找不到命令，检查发行版安装和命令路径；提示缺少 `.sty`，检查相应宏包。更换文本编辑器不能代替这些环境配置。
 
-项目 `Makefile` 已包含上述编译顺序，在安装了 `make` 的兼容环境中可以运行 `make`。`make clean` 用于清理辅助文件，但规则使用了 `rm`，Windows 原生命令行不一定具备相同环境；不熟悉这些工具时，直接使用四条编译命令即可。源文件和文献文件均应保存为 UTF-8。
+项目的 `Makefile` 已写好编译顺序。在具备 `make` 和兼容命令环境的系统中，可以执行 `make`；`make clean` 清理辅助文件。清理命令使用 `rm`，Windows 原生命令行不一定具备同样环境，不熟悉时直接使用上面的四条命令即可。源文件保存为 UTF-8 编码。
 
-### 字体回退不等于与原字体完全一致
+</details>
 
-当前 `xitthesis.cls` 优先尝试项目 `fonts/` 中的宋体、黑体等文件，再尝试 Windows 系统字体路径；没有对应文件时，进入 FandolSong、FandolHei 和 Liberation Serif 等回退配置。这是模板的具体加载规则，不应理解为任何环境都一定安装了全部依赖；例如日志提示缺少 `Noto Sans Mono` 或 `Liberation Serif` 时，仍需处理实际缺少的字体。
+<details>
+<summary>字体为什么和预览略有不同，怎样查看配置</summary>
 
-`fonts/README.md` 说明了相关文件。项目没有附带微软字体二进制文件。需要使用这些字体时，应先确认相应使用权限；上传到在线平台或向他人分发，也需要遵守对应字体授权，私人项目并不自动解决授权问题，具体可查阅[微软字体使用与再分发说明][microsoft-fonts]。关于项目内字体的加载方式，可参照 [Overleaf 的 XeLaTeX 与字体说明][overleaf-fonts]。
+`xitthesis.cls` 中有项目内字体、Windows 系统字体和替代字体的加载分支。项目内主要使用宋体、黑体和 Times New Roman；缺少相应文件时，代码会尝试使用 FandolSong、FandolHei、Liberation Serif 等替代字体。等宽字体还涉及 Noto Sans Mono。回退分支不是任意机器都保证具备的字体集合，具体缺失要以日志为准。
 
-Windows 用户可以先查看 `copy_windows_fonts.ps1`，再在项目目录的 PowerShell 中执行：
+字体变化可能改变字形、换行和分页，因此应在定稿检查之前确定字体。不要拿不同环境下的页数完全一致作为编译成功的唯一判断标准。
 
-```powershell
-.\copy_windows_fonts.ps1
-```
+项目没有附带微软字体二进制文件。需要使用这些字体时，应自行确认相应的使用与上传权限，不能因为是私人论文项目就默认可以随意上传或公开分发。Overleaf 对上传字体也要求确认相关许可，见[官方字体说明][fonts]。
 
-脚本只是尝试从本机 `C:\Windows\Fonts\` 复制已经存在的字体，不会下载缺失字体。主要涉及 `simsun.ttc`、`simhei.ttf`，以及 Times New Roman 的 `times.ttf`、`timesbd.ttf`、`timesi.ttf`、`timesbi.ttf`，还会尝试处理仿宋和楷体。留意脚本输出，部分字形缺失时也可能报错；不要为了运行脚本而关闭系统范围的安全限制，确需手工配置时按实际权限和文件名处理。
+Windows 用户可以先阅读 `copy_windows_fonts.ps1`，再在项目目录的 PowerShell 中执行 `.\copy_windows_fonts.ps1`。脚本从本机 Windows 字体目录复制已有文件，不会下载字体，也不会为本机缺失的字体补齐文件。如果系统阻止脚本运行，可以在确认权限后按 `fonts/README.md` 手工处理，不必关闭系统范围的安全限制。
 
-更换字体可能改变换行和分页，因此应在最终逐页检查前确定使用哪套字体。不要把这些字体随论文源码提交到公开仓库。需要改变页边距、标题字号或页眉页脚时，先备份，再参考 `FORMAT_CHANGELOG.md` 定位 `xitthesis.cls` 中的对应设置，避免对每个标题单独打补丁。
+常用文件包括 `simsun.ttc`、`simhei.ttf` 和 `times.ttf`、`timesbd.ttf`、`timesi.ttf`、`timesbi.ttf`。字体目录和文件名需要与代码一致，不能只放一个常规字形文件就认为配套粗体、斜体也已齐全。不要将这些字体随源码提交到公开仓库。
 
-<a id="export"></a>
-## 导出 PDF，保存能继续修改的源码
+</details>
 
-写完以后重新编译，逐页检查最终 PDF。核对封面信息、中英文题目与关键词、目录页码、图表和公式引用，以及参考文献、谢辞和附录的顺序；全文搜索“请输入”“这里填写”“示例”“sample-reference”“demo-reference”，检查是否遗留占位文字、教学数据或无效引用。遇到确实属于正文内容的“示例”一词，应根据上下文判断，不必机械删除。
+## 导出之前再检查一遍
 
-在 Overleaf 中可通过 PDF 预览区的下载按钮保存本次编译结果，也可从 `File` 菜单选择 `Download as PDF`。除此之外，还应通过 `Download as source (.zip)` 下载一份项目源码 ZIP，保留 `.tex`、图片、文献数据库和样式文件；界面操作可对照[下载项目说明][overleaf-download]。PDF 用于阅读和提交，源码用于后续修改，两者不能互相替代。
+论文写完后，重新编译并查看最终 PDF。核对封面信息、题目与关键词、目录页码、图表引用和文献列表，再检查总结、谢辞、附录是否齐全。全文搜索“请输入”“这里填写”“示例”等字样，逐处判断有没有遗留的占位文字或教学内容。声明页生成了，不代表签名与日期已经按学校要求完成。
 
-初稿、导师修改稿和最终稿可以分别备份，让同一版本的源码和 PDF 对应起来。不要只保留最初下载的模板 ZIP，也不要将已经填写学号、签名或未公开研究内容的个人论文直接上传到公共仓库。
+在 Overleaf 的 PDF 预览区下载本次编译结果，同时保存一份项目源码 ZIP，具体入口见[官方下载说明][download]。PDF 用于阅读与提交，源码用于继续修改；只保留其中一个都不方便后续返修。初稿、导师修改稿和最终提交稿可以分别留存，并让源码与 PDF 的版本能够对应。
 
-## 进一步查阅与反馈
+使用中的其他写法可以在单个论文 ZIP 内的 `LATEX_OVERLEAF_GUIDE.md` 查找；版式调整记录在 `FORMAT_CHANGELOG.md`。发现问题可在仓库 Issues 中说明使用的是空白版还是示例版、在线还是本地环境，并附首个关键报错和能复现问题的小段代码。涉及学校新规范时附上对应要求，截图和文件中的个人信息请先脱敏。
 
-单个模板中还附有 `LATEX_OVERLEAF_GUIDE.md`，遇到更复杂的图表、文献和编译问题，可以继续查阅。需要追踪版式调整时看 `FORMAT_CHANGELOG.md`，不必把全部配置都放进正文文件。
-
-发现模板问题，欢迎在仓库的 Issues 中说明使用的是空白版、AI 示例版还是本页练习项目，附上编译环境、首个关键错误和能复现问题的最小代码。涉及学校格式要求的，请附对应规范；涉及个人信息的，先做脱敏处理。熟悉 LaTeX 的同学也可以通过 Pull Request 提交修改。
-
-本页配图来源和练习内容说明见 [docs/IMAGE_SOURCES.md](docs/IMAGE_SOURCES.md)。它们用于说明如何使用模板，不替代学校规范，也不表示学校或软件平台对本项目作出认证。
-
-[github-download]: https://docs.github.com/en/repositories/working-with-files/using-files/downloading-source-code-archives
 [overleaf]: https://www.overleaf.com/
-[overleaf-upload]: https://docs.overleaf.com/managing-projects-and-files/uploading-a-project
-[overleaf-compiler]: https://docs.overleaf.com/getting-started/recompiling-your-project/selecting-a-tex-live-version-and-latex-compiler
-[overleaf-main]: https://docs.overleaf.com/getting-started/recompiling-your-project/the-main-document
-[overleaf-biblatex]: https://www.overleaf.com/learn/latex/Bibliography_management_with_biblatex
-[overleaf-cache]: https://docs.overleaf.com/troubleshooting-and-support/clearing-the-project-cache
-[overleaf-download]: https://docs.overleaf.com/managing-projects-and-files/downloading-a-project
-[overleaf-fonts]: https://www.overleaf.com/learn/latex/XeLaTeX
-[texlive]: https://www.tug.org/texlive/
-[mactex]: https://www.tug.org/mactex/
-
-[python-generics]: https://docs.python.org/3.9/library/typing.html
-[microsoft-fonts]: https://learn.microsoft.com/en-us/typography/fonts/font-faq
+[upload]: https://www.overleaf.com/learn/latex/Kb/Uploading_a_project
+[compiler]: https://docs.overleaf.com/getting-started/recompiling-your-project/selecting-a-tex-live-version-and-latex-compiler
+[main-document]: https://docs.overleaf.com/getting-started/recompiling-your-project/the-main-document
+[images]: https://www.overleaf.com/learn/latex/Inserting_Images
+[bibliography]: https://www.overleaf.com/learn/latex/Bibliography_management_with_biblatex
+[cache]: https://docs.overleaf.com/troubleshooting-and-support/clearing-the-project-cache
+[download]: https://docs.overleaf.com/managing-projects-and-files/downloading-a-project
+[fonts]: https://www.overleaf.com/learn/latex/XeLaTeX
+[texlive]: https://tug.org/texlive/
+[mactex]: https://tug.org/mactex/
