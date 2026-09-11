@@ -19,6 +19,27 @@
 
 在 GitHub 点击文件名进入文件页面后，可以下载对应 ZIP。也可以从仓库首页的 `Code > Download ZIP` 下载整个仓库。后一种方式得到的是外层压缩包，**先把它解压，再取出里面的单个论文 ZIP**。上传论文时，不要把装着两套模板和 README 配图的外层压缩包传上去。
 
+### 先选在线平台，再选编译器
+
+第一次接触 LaTeX，可以先用浏览器打开在线平台，无需在电脑上安装 TeX Live。**Overleaf、LoongTeX 是写论文的平台，XeLaTeX 是平台中负责生成 PDF 的编译器。** 选择平台后，仍需要检查项目的编译设置。
+
+| 名称 | 它负责什么 | 本模板怎么选 |
+| --- | --- | --- |
+| Overleaf / LoongTeX | 上传文件、编辑源码、查看 PDF 的在线平台 | 任选一个，先完成一次编译 |
+| XeLaTeX | 将 `.tex` 源文件编译成 PDF | 本模板必须选它 |
+| `main.tex` | 整篇论文的主文件 | 设为主文档，不选单独的章节文件 |
+| Biber | 处理 `ref.bib` 中的参考文献 | 本模板已配置 `backend=biber`，不是 PDF 编译器选项 |
+| TeX Live 版本 | 平台提供的宏包与工具版本 | 初次先用平台默认版本，成功后记录该版本 |
+
+选择平台时，可以先打开下面两个网站，选自己访问顺畅、能看懂操作界面的一个；如果导师或同学已经使用其中一个，也可以跟随他们，方便交流。
+
+- **[Overleaf][overleaf]**：本页提供对应的操作步骤，可同时对照其官方图文帮助。
+- **[LoongTeX（龙文）][loongtex]**：提供中文官网与帮助文档，可按下方“在 LoongTeX 中打开模板”操作。可从官网进入[工作台][loongtex-app]。
+
+不必同时注册两个平台，也不必为了第一次编译先购买订阅。先查看当前账户的可用功能，确认能够上传模板并完成编译；如遇文件大小或编译时间限制，再按平台现行规则处理。平台的收费、访问速度和使用限制可能变化，本教程不保证两者在所有网络和账户下表现相同。
+
+**无论选择哪个平台，开始时都记住：上传单个论文 ZIP → 编译器选 XeLaTeX → 主文件选 main.tex → 编译并检查 PDF。** 本模板明确限制使用 XeLaTeX，不能因为另一个模板使用 pdfLaTeX 或 LuaLaTeX 就照搬设置。Biber 保持现有配置；引用异常时按后文的参考文献排错步骤检查日志。
+
 ### 在 Overleaf 中打开模板
 
 LaTeX 的源文件是 `.tex`，排版后的成品是 PDF。“编译”就是把源文件里的文字和命令处理成 PDF。Overleaf 提供在线编辑与编译环境，不打算安装本地软件的同学，可以用它开始。
@@ -27,19 +48,35 @@ LaTeX 的源文件是 `.tex`，排版后的成品是 PDF。“编译”就是把
 
 打开项目设置 `Settings`，进入 `Compiler`，将编译器设为 **XeLaTeX**，将 `Main document` 设为 **main.tex**。设置入口可能是编辑器左下方的齿轮按钮，也可以从 `File > Settings` 进入；旧界面通常从 `Menu` 进入。界面位置有变化时，认准这两个设置名称即可。[编译器设置][compiler]和[主文件设置][main-document]的官方说明中都有截图。
 
+### 在 LoongTeX 中打开模板
+
+1. 打开 [LoongTeX 官网][loongtex]，进入工作台，按网站提示注册或登录。
+2. 在项目管理页面选择“新建项目”，在弹窗中选择“上传项目”，然后点击“导入文件”，选择 `厦门工学院毕业设计论文模板.zip`。这几个入口来自 [LoongTeX 官方上传说明][loongtex-upload]。不要上传包含两套模板的仓库外层 ZIP。
+3. 导入完成后，点击项目标题进入编辑器，确认文件区能看到 `main.tex`、`xitthesis.cls`、`ref.bib` 和 `chap/`。
+4. 根据 [LoongTeX 官方配置说明][loongtex-settings]，点击编辑器中的“小锤头”图标打开配置，在“设置”中检查编译方式。将编译引擎设为 **XeLaTeX**，检查主文件指向 **main.tex**；若平台已经自动识别，也要核对结果。具体字段名称与位置以当前界面为准。
+5. 点击 **Compile** 开始编译，等待 PDF 生成。按钮操作见 [LoongTeX 官方编译说明][loongtex-compile]。若失败，查看日志中的第一个错误，不要仅反复点击按钮。
+
+以上 LoongTeX 步骤依据官方公开文档整理，尚未在登录账户中实测本模板。若当前配置界面无法找到主文件或编译器选项，先查阅官方帮助确认入口；不能仅凭上传成功认定模板已经兼容该环境。
+
+### 两个平台都要做的首次编译检查
+
 ![上传后的文件检查：空白模板目录、编译器与主文件设置值](docs/images/02-project-files.png)
 
 *这是根据原包文件整理的检查图，不是 Overleaf 界面截图。设置中的 XeLaTeX 和 main.tex 分别是编译器与主文件，不能互相替代。*
 
 本模板的样式文件明确要求使用 XeLaTeX。不要选择 pdfLaTeX，也不要把某一章的 `chapter1.tex` 设成主文件。`TeX Live version` 是另一项设置，第一次可以先保留默认值，遇到版本兼容问题时再结合日志处理。
 
-点击 `Recompile`（重新编译），查看生成的 PDF。首次使用可以先不改其他地方，只在 `main.tex` 中找到这一行：
+在 Overleaf 点击 `Recompile`，在 LoongTeX 点击 `Compile`，查看生成的 PDF。首次使用可以先不改其他地方，只在 `main.tex` 中找到这一行：
 
 ```tex
 \XITAuthor{请输入姓名}
 ```
 
 把大括号中的文字换成自己的姓名，保留命令和大括号，再编译一次。封面姓名也变化了，说明上传、编辑和编译这条流程已经走通，接下来再填写其他内容。
+
+初次运行时先确认四件事：文件区已展开为源码而非仍是 ZIP；编译器是 XeLaTeX；主文件是 `main.tex`；编译成功且新 PDF 显示刚修改的姓名。确认后保存源码备份。以后换平台时，上传完整源码项目并重新检查这些设置；不能只上传 PDF，也不能假设另一平台会保留原来的编译设置。
+
+本节平台入口与操作文档核对日期：2026-09-11。官方界面可能更新，操作位置以当前平台与所链接的官方文档为准。
 
 这里要区分新生成的 PDF 与压缩包自带的预览。`preview.pdf` 是已有快照，不会随源文件修改自动更新；示例版随附 PDF 的封面姓名与当前 `main.tex` 中的姓名也不一致。检查修改结果时，请看**本次成功编译生成的 PDF**，不要拿旧预览判断修改是否生效。
 
@@ -474,6 +511,11 @@ Windows 用户可以先阅读 `copy_windows_fonts.ps1`，再在项目目录的 P
 学校名称、校徽、Logo、字体以及其他第三方素材不自动纳入 MIT License，其相关权利仍归原权利人所有。具体边界见 [NOTICE.md](NOTICE.md)。
 
 [overleaf]: https://www.overleaf.com/
+[loongtex]: https://www.loongtex.com/
+[loongtex-app]: https://app.loongtex.com/
+[loongtex-upload]: https://www.loongtex.com/docs/article/create-article-from-upload/
+[loongtex-settings]: https://www.loongtex.com/docs/article/using-the-loongtex-article-menu/
+[loongtex-compile]: https://www.loongtex.com/docs/article/using-the-loongtex-compile-your-article/
 [upload]: https://www.overleaf.com/learn/latex/Kb/Uploading_a_project
 [compiler]: https://docs.overleaf.com/getting-started/recompiling-your-project/selecting-a-tex-live-version-and-latex-compiler
 [main-document]: https://docs.overleaf.com/getting-started/recompiling-your-project/the-main-document
